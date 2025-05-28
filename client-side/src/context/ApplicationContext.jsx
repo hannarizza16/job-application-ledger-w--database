@@ -8,7 +8,6 @@ export const ApplicationContext = createContext()
 export function ApplicationProvider({ children }) {
     const [state, dispatch] = useReducer(applicationReducer, initialState)
     const [successMessage, setSuccessMessage] = useState('')
-    const { applications } = state
 
     const [showSuccess, setShowSuccess] = useState(false)
 

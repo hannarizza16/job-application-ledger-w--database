@@ -33,7 +33,7 @@ function App() {
 
   return (
     
-    <ApplicationProvider>
+    <ApplicationProvider> 
       <div className='flex h-screen'>
         <Sidebar> {/*this is whre you sidebar wraps the sidebarItem */}
           {/* and this is the Children being passed in sidebar */}
