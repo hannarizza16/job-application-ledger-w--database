@@ -1,3 +1,5 @@
+
+
 import { useReducer, createContext, useEffect, useState } from "react"
 import { applicationReducer, initialState } from "../reducers/applicationReducer"
 import { ACTION_TYPES } from "../action-types/actionTypes"
@@ -10,12 +12,15 @@ export function ApplicationProvider({ children }) {
     const [successMessage, setSuccessMessage] = useState('')
 
     const [showSuccess, setShowSuccess] = useState(false)
-    
+
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+
 // to fetch data from the backend api when component first mounts
 useEffect(() => {
     const fetchApplications = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/input/all')
+            const response = await axios.get(`${API_BASE_URL}/input/all`)
             console.log("Fetched applications:", response.data); //Check this
 
             dispatch({
@@ -32,7 +37,7 @@ useEffect(() => {
 
     const addApplicationToDb = async (formData) => {
         try {
-            const response = await axios.post('http://localhost:8000/input/create', formData)
+            const response = await axios.post(`${API_BASE_URL}/input/create`, formData)
             dispatch({
                 type: ACTION_TYPES.SET_ADD_APPLICATIONS,
                 data: response.data
@@ -49,7 +54,7 @@ useEffect(() => {
 
     const archiveApplication = async (id) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/input/archive/${id}`);
+            const response = await axios.patch(`${API_BASE_URL}/input/archive/${id}`);
 
             dispatch({
                 type: ACTION_TYPES.ARCHIVE_APPLICATION,
@@ -66,7 +71,7 @@ useEffect(() => {
 
     const unarchiveApplication = async (id) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/input/unarchive/${id}`)
+            const response = await axios.patch(`${API_BASE_URL}/input/unarchive/${id}`)
             dispatch({
                 type: ACTION_TYPES.UNARCHIVE_APPLICATION,
                 data: response.data
@@ -81,7 +86,7 @@ useEffect(() => {
 
     const deleteApplicationToDb = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/input/${id}`)
+            await axios.delete(`${API_BASE_URL}/input/${id}`)
             dispatch({
                 type: ACTION_TYPES.DELETE_APPLICATION,
                 data: id
