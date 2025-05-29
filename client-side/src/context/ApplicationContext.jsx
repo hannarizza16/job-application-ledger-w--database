@@ -10,7 +10,7 @@ export function ApplicationProvider({ children }) {
     const [successMessage, setSuccessMessage] = useState('')
 
     const [showSuccess, setShowSuccess] = useState(false)
-
+    
 // to fetch data from the backend api when component first mounts
 useEffect(() => {
     const fetchApplications = async () => {
