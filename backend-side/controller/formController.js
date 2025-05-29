@@ -72,6 +72,20 @@ const unarchiveApplication = async (req, res) => {
     }
 }
 
-export {getAllApplication, inputApplication, deleteApplication, archiveApplication, unarchiveApplication}
+const editApplication = async (req, res) => {
+    try {
+        const application = await Form.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!application) {
+            return res.status(404).send('Application not found');
+        }
+        res.status(200).json(application);
+
+    } catch (error) {
+        console.error('Error editing application', error)
+        res.status(500).send('Failed to edit')
+        
+    }
+}
+export {getAllApplication, inputApplication, deleteApplication, archiveApplication, unarchiveApplication, editApplication}
 
 // {new: true } -  return the updated document instead of the new one
